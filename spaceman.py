@@ -15,13 +15,12 @@ def is_word_guessed(letters_guessed):
     #pass
 
 def get_guessed_word(secret_word, letters_guessed):
+    print("letters_guessed " + str(letters_guessed))
     
-    #guessed = [i if i in letters_guessed else "_" for i in secret_word]
-    #return "".join(guessed)
     word = ""
-    for i in secret_word:
-        if i in letters_guessed:
-            word += letters_guessed
+    for letter in secret_word:
+        if letter in letters_guessed:
+            word += letter
         else:
             word += "_"
     return word
@@ -31,7 +30,7 @@ def get_guessed_word(secret_word, letters_guessed):
     #pass
 
 
-def is_guess_in_word(guess, secret_word):
+def is_guess_in_word(guess, secret_word, letters_guessed):
     '''
     A function to check if the guessed letter is in the secret word
     Args:
@@ -40,8 +39,7 @@ def is_guess_in_word(guess, secret_word):
     Returns:
         bool: True if the guess is in the secret_word, False otherwise
     '''
-    letters_guessed = []
-    
+
     if guess.isalpha() == False:
         print("Enter a letter here ")
     elif len(guess) > 1:
@@ -51,7 +49,7 @@ def is_guess_in_word(guess, secret_word):
         print(letters_guessed)
     elif guess in secret_word:
         letters_guessed.append(guess)
-        "".join(letters_guessed)
+        #"".join(letters_guessed)
         return True
     else:
         letters_guessed.append(guess)
@@ -65,7 +63,7 @@ def is_guess_in_word(guess, secret_word):
 
 def spaceman(secret_word):
     
-    correct = "Good Job "
+    correct = "Good Guess "
     wrong = 0
     did_you = "_"
     woops = "Wrong Answer, Current guesses left: "
@@ -76,10 +74,10 @@ def spaceman(secret_word):
     print("Welcome " + name + " to Spaceman! Try to guess each part of the word to win the game!")
     print("The correct word is {} letters long".format(len(secret_word)))
 
-    for guesses in range(9):
+    for guesses in range(30):
         guesses += 1
         guess = input('Enter a letter: ').lower()
-        a = is_guess_in_word(guess, secret_word)
+        a = is_guess_in_word(guess, secret_word, letters_guessed)
         if a:
             did_you = get_guessed_word(secret_word,letters_guessed)
             print(correct + did_you)
@@ -90,7 +88,7 @@ def spaceman(secret_word):
                 break
         elif a == False:
             if wrong == 7:
-                loss = "Sorry, Game Over homie."
+                loss = "Sorry, Game Over homie. Now you are a SPACEMAN!"
                 print(loss)
                 print ('The word was ' + secret_word)
                 break
@@ -98,7 +96,7 @@ def spaceman(secret_word):
                 
             else:
                 wrong += 1
-                losing = 6 - wrong
+                losing = 8 - wrong
                 print(woops + str(losing))
 
     #TODO: show the player information about the game according to the project spec
