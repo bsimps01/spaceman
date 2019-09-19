@@ -93,10 +93,11 @@ def spaceman(secret_word):
                 losing = 8 - wrong
                 print(woops + str(losing))
 
+#These function calls that will start the game
+secret_word = load_word()
+spaceman(secret_word)
+
 if __name__ == "__main__":
     test_is_word_guessed()
     test_get_guessed_word()
     test_is_guess_in_word(is_guess_in_word)
-#These function calls that will start the game
-secret_word = load_word()
-spaceman(secret_word)
