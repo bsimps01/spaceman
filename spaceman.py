@@ -12,6 +12,11 @@ def is_word_guessed(letters_guessed):
     if not '_' in letters_guessed:
         return True
 
+def test_is_word_guessed():
+    assert is_word_guessed("good") == True
+    assert is_word_guessed("r3jected") == False
+    assert is_word_guessed("great") == True
+
 def get_guessed_word(secret_word, letters_guessed):
     print("letters_guessed " + str(letters_guessed))
     
@@ -23,6 +28,10 @@ def get_guessed_word(secret_word, letters_guessed):
             word += "_"
     return word
 
+def test_get_guessed_word():
+    assert get_guessed_word(("fun"), ["f","u"]) == "fu_"
+    assert get_guessed_word(("weird"), ["w","e","r","d"]) == "we_rd"
+    assert get_guessed_word(("puppy"), ["p","u","p","p","y"]) == "puppy"
 
 def is_guess_in_word(guess, secret_word, letters_guessed):
 
@@ -41,7 +50,11 @@ def is_guess_in_word(guess, secret_word, letters_guessed):
         letters_guessed.append(guess)
         return False
 
-
+def test_is_guess_in_word(is_guess_in_word):
+    assert is_guess_in_word(("h", "o", "m", "e"), ("home")) == True
+    assert is_guess_in_word(("b", "a", "s", "e"), ("base")) == True
+    assert is_guess_in_word(("w", "a", "s", "h"), ("wash")) == True
+    assert is_guess_in_word(("g", "r", "e", "a", "t"), ("great")) == True
 
 
 def spaceman(secret_word):
@@ -80,6 +93,10 @@ def spaceman(secret_word):
                 losing = 8 - wrong
                 print(woops + str(losing))
 
+if __name__ == "__main__":
+    test_is_word_guessed()
+    test_get_guessed_word()
+    test_is_guess_in_word(is_guess_in_word)
 #These function calls that will start the game
 secret_word = load_word()
 spaceman(secret_word)
